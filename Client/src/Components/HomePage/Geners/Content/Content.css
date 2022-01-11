@@ -1,0 +1,12 @@
+.ConentImage{
+ 
+    border-radius: 7px;
+   height: 20vh;
+    
+}
+.ConentImage:hover
+{
+  
+        cursor: pointer;
+    
+}
