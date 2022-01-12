@@ -1,7 +1,8 @@
 import logo from './logo.svg';
 import './App.scss';
 import { useState, useEffect } from 'react';
-
+import HomePage from './Components/HomePage/HomePage';
+import Logo from './Components/Logo/Logo';
 const App = () => {
   const [serverSide, setTest] = useState();
   useEffect(() => {
@@ -36,6 +37,14 @@ const App = () => {
           <p>{ JSON.stringify(serverSide) }</p>
         </header>
       </div> : null
+    // <div className='appContainer'>
+    //   <Logo></Logo>
+    //   <HomePage></HomePage>
+    //   <HomePage></HomePage>
+    //   <HomePage></HomePage>
+    //   <HomePage></HomePage>
+
+    // </div>
   );
 };
 

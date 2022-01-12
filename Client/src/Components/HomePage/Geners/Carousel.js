@@ -15,7 +15,7 @@ const Carousel = () => {
                 // install Swiper modules
                 modules={ [Navigation, Pagination, Scrollbar, A11y] }
                 spaceBetween={ 50 }
-                slidesPerView={ 6 }
+                slidesPerView={ 5 }
                 loop={ true }
                 navigation={ { allowTouchMove: true } }
 
