@@ -9,68 +9,53 @@ import 'swiper/scss/navigation';
 import 'swiper/scss/pagination';
 import 'swiper/scss/scrollbar';
 const Carousel = () => {
-    return (
-        <div className={ "CarouselDiv" }>
-            <Swiper
-                // install Swiper modules
-                modules={ [Navigation, Pagination, Scrollbar, A11y] }
-                spaceBetween={ 50 }
-                slidesPerView={ 5 }
-                loop={ true }
-                navigation={ { allowTouchMove: true } }
+    const [data, setdata] = useState();
+    const [renderData, setRenderData] = useState(3);
+    useEffect(() => {
+        fetch('/movies').then(res => {
+            if (res.ok) {
+                return res.json();
+            }
+        }).then(jsonResponse => {
+            setdata(jsonResponse);
 
-                pagination={ { clickable: true } }
-                scrollbar={ { draggable: true } }
-                onSwiper={ (swiper) => console.log(swiper) }
-                onSlideChange={ () => console.log('slide change') }
-            >
-                <SwiperSlide><Content></Content></SwiperSlide>
-                <SwiperSlide><Content></Content></SwiperSlide>
-                <SwiperSlide><Content></Content></SwiperSlide>
-                <SwiperSlide><Content></Content></SwiperSlide>
-                <SwiperSlide><Content></Content></SwiperSlide>
-                <SwiperSlide><Content></Content></SwiperSlide>
-                <SwiperSlide><Content></Content></SwiperSlide>
-                <SwiperSlide><Content></Content></SwiperSlide>
-                <SwiperSlide><Content></Content></SwiperSlide>
-                <SwiperSlide><Content></Content></SwiperSlide>
-                <SwiperSlide><Content></Content></SwiperSlide>
-                <SwiperSlide><Content></Content></SwiperSlide>
-                <SwiperSlide><Content></Content></SwiperSlide>
-                <SwiperSlide><Content></Content></SwiperSlide>
-                <SwiperSlide><Content></Content></SwiperSlide>
-                <SwiperSlide><Content></Content></SwiperSlide>
-                <SwiperSlide><Content></Content></SwiperSlide>
-                <SwiperSlide><Content></Content></SwiperSlide>
-                <SwiperSlide><Content></Content></SwiperSlide>
-                <SwiperSlide><Content></Content></SwiperSlide>
-                <SwiperSlide><Content></Content></SwiperSlide>
-                <SwiperSlide><Content></Content></SwiperSlide>
-                <SwiperSlide><Content></Content></SwiperSlide>
-                <SwiperSlide><Content></Content></SwiperSlide>
-                <SwiperSlide><Content></Content></SwiperSlide>
-                <SwiperSlide><Content></Content></SwiperSlide>
-                <SwiperSlide><Content></Content></SwiperSlide>
-                <SwiperSlide><Content></Content></SwiperSlide>
-                <SwiperSlide><Content></Content></SwiperSlide>
-                <SwiperSlide><Content></Content></SwiperSlide>
-                <SwiperSlide><Content></Content></SwiperSlide>
-                <SwiperSlide><Content></Content></SwiperSlide>
-                <SwiperSlide><Content></Content></SwiperSlide>
-                <SwiperSlide><Content></Content></SwiperSlide>
-                <SwiperSlide><Content></Content></SwiperSlide>
-                <SwiperSlide><Content></Content></SwiperSlide>
-                <SwiperSlide><Content></Content></SwiperSlide>
-                <SwiperSlide><Content></Content></SwiperSlide>
-                <SwiperSlide><Content></Content></SwiperSlide>
-                <SwiperSlide><Content></Content></SwiperSlide>
-                <SwiperSlide><Content></Content></SwiperSlide>
-                <SwiperSlide><Content></Content></SwiperSlide>
-                <SwiperSlide><Content></Content></SwiperSlide>
-                <SwiperSlide><Content></Content></SwiperSlide>
-                ...
-            </Swiper>
-        </div>
+
+        });
+    }, []);
+    useEffect(() => {
+
+    }, []);
+
+
+
+    return (
+        data ?
+            <div className={ "CarouselDiv" }>
+                <Swiper
+                    // install Swiper modules
+                    modules={ [Navigation, Pagination, Scrollbar, A11y] }
+                    spaceBetween={ 50 }
+                    slidesPerView={ 5 }
+
+                    navigation={ { allowTouchMove: true } }
+
+                    pagination={ { clickable: true } }
+                    scrollbar={ { draggable: true } }
+                    onSwiper={ (swiper) => console.log(swiper) }
+                    onSlideChange={ () => console.log('slide change') }
+                >
+
+
+
+                    { data.map(obj => <SwiperSlide><Content name={ obj.name } image={ obj.image } location={ obj.location }></Content></SwiperSlide>
+                    ) }
+
+
+
+
+
+                </Swiper>
+            </div> : null
     );
 };
 export default Carousel;

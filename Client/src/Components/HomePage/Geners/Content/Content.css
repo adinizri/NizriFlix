@@ -1,7 +1,8 @@
 .ConentImage{
  
     border-radius: 7px;
-   height: 20vh;
+  width: 18vw;
+  height: 20vh;
     
 }
 .ConentImage:hover
