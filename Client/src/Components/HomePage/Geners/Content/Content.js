@@ -10,16 +10,17 @@ const Content = (props) => {
     const [location, setLocation] = useState();//location of the content
 
     useEffect(() => {
-        setImage(props.image);
+        setImage(props.data);
 
-        setLocation(props.location);
-        setName(props.name);
+        // setLocation(props.location);
+        // setName(props.name);
 
     }, [props]);
 
     return (
-
-        <img src={ process.env.PUBLIC_URL + location + '/' + image } className={ "ConentImage" }></img>
+        image ?
+            <img src={ image.data } className={ "ConentImage" }></img> : null
+        // <img src={ process.env.PUBLIC_URL + location + '/' + image } className={ "ConentImage" }></img>
     );
 };
 export default Content;

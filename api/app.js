@@ -1,4 +1,6 @@
 require('./db/mongoConnection');
+var fs = require("fs");
+var readimage = require("readimage");
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');

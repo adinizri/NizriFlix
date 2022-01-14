@@ -47,7 +47,8 @@ const Carousel = () => {
 
 
 
-                    { data.map(obj => <SwiperSlide><Content name={ obj.name } image={ obj.image } location={ obj.location }></Content></SwiperSlide>
+                    { data.map(obj => <SwiperSlide><Content data={ obj }></Content></SwiperSlide>
+                        // name={ obj.name } image={ obj.image } location={ obj.location 
                     ) }
 
 
