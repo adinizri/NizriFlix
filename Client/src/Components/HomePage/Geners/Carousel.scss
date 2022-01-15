@@ -1,8 +1,14 @@
 .CarouselDiv{
-    height:20vh;
+    height:22vh;
     width: 95vw;
     margin: auto;
-    padding-top: 2vh;
+    // padding-top: 2vh;
+}
+.CarouselDiv:hover{
+
+  
+    margin: auto;
+    
 }
 .swiper-pagination-bullet-active {
     background-color: rgb(202, 0, 0) !important;
@@ -10,5 +16,8 @@
 .swiper-pagination-bullet{
     background-color: rgb(209, 209, 209) !important;
 }
-
+.Title{
+    color: #e5e5e5;
+    font-size: 1.8em;
+}
 

@@ -3,6 +3,7 @@ import './App.scss';
 import { useState, useEffect } from 'react';
 import HomePage from './Components/HomePage/HomePage';
 import Logo from './Components/Logo/Logo';
+import Player from './Components/Player/Player';
 const App = () => {
 
 
@@ -10,7 +11,8 @@ const App = () => {
 
     <div className='appContainer'>
       <Logo></Logo>
-      <HomePage></HomePage>
+      {/* <HomePage></HomePage> */ }
+      <Player></Player>
 
     </div>
   );

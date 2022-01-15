@@ -9,15 +9,15 @@ import 'swiper/scss/navigation';
 import 'swiper/scss/pagination';
 import 'swiper/scss/scrollbar';
 const Carousel = () => {
-    const [data, setdata] = useState();
+    const [data, setData] = useState();
     const [renderData, setRenderData] = useState(3);
     useEffect(() => {
-        fetch('/movies').then(res => {
+        fetch('/movies/moviesData').then(res => {
             if (res.ok) {
                 return res.json();
             }
         }).then(jsonResponse => {
-            setdata(jsonResponse);
+            setData(jsonResponse);
 
 
         });
@@ -31,6 +31,7 @@ const Carousel = () => {
     return (
         data ?
             <div className={ "CarouselDiv" }>
+                <p className="Title">Watch Again</p>
                 <Swiper
                     // install Swiper modules
                     modules={ [Navigation, Pagination, Scrollbar, A11y] }
@@ -47,7 +48,7 @@ const Carousel = () => {
 
 
 
-                    { data.map(obj => <SwiperSlide><Content data={ obj }></Content></SwiperSlide>
+                    { data.map(obj => <SwiperSlide><Content image={ obj.image } location={ obj.location } name={ obj.name }></Content></SwiperSlide>
                         // name={ obj.name } image={ obj.image } location={ obj.location 
                     ) }
 

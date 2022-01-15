@@ -1,13 +1,20 @@
 .ConentImage{
  
     border-radius: 7px;
-  width: 18vw;
+   width: 18vw; 
   height: 20vh;
     
 }
 .ConentImage:hover
 {
-  
-        cursor: pointer;
-    
+  border-radius: 7px;
+  cursor: pointer;
+   width: 20vw;
+  height: 24vh;
+  /* margin-right: 20vw; */
+  z-index: 10;
+  position: inherit;
+  margin-right: 2vw; 
+  transform: scale(1.2);
+  transition: transform .25s ease;
 }

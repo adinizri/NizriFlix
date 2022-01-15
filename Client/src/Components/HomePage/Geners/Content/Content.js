@@ -9,7 +9,9 @@ const Content = (props) => {
     const [location, setLocation] = useState();//location of the content
 
     useEffect(() => {
-        setImage("data:image/jfif;base64," + props.data);
+        setImage("data:image/jfif;base64," + props.image);
+        setName(props.name);
+        setLocation(props.location);
 
         // setLocation(props.location);
         // setName(props.name);
