@@ -5,14 +5,22 @@ import HomePage from './Components/HomePage/HomePage';
 import Logo from './Components/Logo/Logo';
 import Player from './Components/Player/Player';
 const App = () => {
+  const [playing, setPlaying] = useState(false);
+  const [data, setData] = useState();
 
 
+  const isPlaying = () => {
+    setPlaying(true);
+  };
+  const getData = (data) => {
+    setData(data);
+  };
   return (
 
     <div className='appContainer'>
       <Logo></Logo>
-      {/* <HomePage></HomePage> */ }
-      <Player></Player>
+      { playing ? <Player data={ data } ></Player> : <HomePage isPlaying={ isPlaying } getData={ getData }></HomePage> }
+
 
     </div>
   );

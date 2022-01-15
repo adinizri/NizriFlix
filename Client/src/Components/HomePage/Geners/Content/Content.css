@@ -12,7 +12,7 @@
    width: 20vw;
   height: 24vh;
   /* margin-right: 20vw; */
-  z-index: 10;
+  /*z-index: 10;*/
   position: inherit;
   margin-right: 2vw; 
   transform: scale(1.2);

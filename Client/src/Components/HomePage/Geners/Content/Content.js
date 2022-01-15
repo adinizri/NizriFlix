@@ -18,17 +18,24 @@ const Content = (props) => {
 
     }, [props]);
 
-    function toBase64 (arr) {
-        //arr = new Uint8Array(arr) if it's an ArrayBuffer
-        return btoa(
-            arr.reduce((data, byte) => data + String.fromCharCode(byte), '')
+    // function toBase64 (arr) {
+    //     //arr = new Uint8Array(arr) if it's an ArrayBuffer
+    //     return btoa(
+    //         arr.reduce((data, byte) => data + String.fromCharCode(byte), '')
 
-        );
-        console.log(arr);
-    }
+    //     );
+    //     console.log(arr);
+    // }
+
+    const HandleClick = () => {
+        props.getData({ name: name, location: location });
+        props.isPlaying();
+
+
+    };
     return (
         image ?
-            <img src={ (image) } className={ "ConentImage" }></img> : null
+            <img src={ (image) } onClick={ () => HandleClick() } className={ "ConentImage" }></img> : null
         // <img src={ process.env.PUBLIC_URL + location + '/' + image } className={ "ConentImage" }></img>
     );
 };

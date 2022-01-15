@@ -4,11 +4,14 @@ import Carousel from "./Geners/Carousel";
 import Styles from './HomePage.scss';
 
 
-const HomePage = () => {
+const HomePage = (props) => {
+    const updateAppIsPlaying = () => {
+        props.isPlaying();
+    };
     return (
         <div className={ "HomePageDiv" }>
 
-            <Carousel></Carousel>
+            <Carousel isPlaying={ updateAppIsPlaying } getData={ props.getData }></Carousel>
         </div>
     );
 };

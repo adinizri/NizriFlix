@@ -8,7 +8,7 @@ import 'swiper/scss';
 import 'swiper/scss/navigation';
 import 'swiper/scss/pagination';
 import 'swiper/scss/scrollbar';
-const Carousel = () => {
+const Carousel = (props) => {
     const [data, setData] = useState();
     const [renderData, setRenderData] = useState(3);
     useEffect(() => {
@@ -48,7 +48,7 @@ const Carousel = () => {
 
 
 
-                    { data.map(obj => <SwiperSlide><Content image={ obj.image } location={ obj.location } name={ obj.name }></Content></SwiperSlide>
+                    { data.map(obj => <SwiperSlide><Content isPlaying={ props.isPlaying } getData={ props.getData } image={ obj.image } location={ obj.location } name={ obj.name }></Content></SwiperSlide>
                         // name={ obj.name } image={ obj.image } location={ obj.location 
                     ) }
 
