@@ -3,7 +3,6 @@ var express = require('express');
 var fs = require('fs');
 var readimage = require("readimage");
 
-
 var router = express.Router();
 const { movieModel } = require("../models/movieModel");
 
@@ -15,8 +14,9 @@ router.get("/", async (req, res) => {
     console.log(data);
     // obje = JSON.parse(data);
     data.forEach((obj) => {
-        img = fs.readFileSync(obj.location + '/' + obj.image);
-        filedata.push(img);
+        let bitImg = fs.readFileSync(obj.location + '/' + obj.image);
+        objImg = new Buffer.from(bitImg).toString("base64");
+        filedata.push(objImg);
         // readimage(img, function (err, image) {
         //     if (err) {
         //         console.log("failed to parse the image");
