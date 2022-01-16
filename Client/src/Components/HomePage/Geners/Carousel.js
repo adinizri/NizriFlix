@@ -37,9 +37,10 @@ const Carousel = (props) => {
                     modules={ [Navigation, Pagination, Scrollbar, A11y] }
                     spaceBetween={ 50 }
                     slidesPerView={ 5 }
-
+                    autoHeight={ true }
+                    // zoom={ { maxRatio: 5 } }
                     navigation={ { allowTouchMove: true } }
-
+                    grabCursor={ true }
                     pagination={ { clickable: true } }
                     scrollbar={ { draggable: true } }
                     onSwiper={ (swiper) => console.log(swiper) }
@@ -57,7 +58,7 @@ const Carousel = (props) => {
 
 
                 </Swiper>
-            </div> : null
+            </div > : null
     );
 };
 export default Carousel;

@@ -13,6 +13,19 @@
   height: 24vh;
   /* margin-right: 20vw; */
   /*z-index: 10;*/
+  /* position: inherit;
+  margin-right: 2vw; 
+  transform: scale(1.2);
+  transition: transform .25s ease; */
+}
+.nameDiv{
+  font-size: larger;
+  color: rgb(211, 209, 209);
+}
+.container{
+  margin-bottom: 2vh;
+}
+.container:hover{
   position: inherit;
   margin-right: 2vw; 
   transform: scale(1.2);

@@ -25,6 +25,7 @@ const Player = (props) => {
     }, []);
     return (
         source != "" ?
+
             <ReactPlayer url={ source } width="60%" height="60%" controls={ true } /> : null
     );
 };

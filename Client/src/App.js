@@ -19,7 +19,7 @@ const App = () => {
 
     <div className='appContainer'>
       <Logo></Logo>
-      { playing ? <Player data={ data } ></Player> : <HomePage isPlaying={ isPlaying } getData={ getData }></HomePage> }
+      { playing ? <Player data={ data } ></Player> : <><HomePage isPlaying={ isPlaying } getData={ getData }></HomePage> </> }
 
 
     </div>

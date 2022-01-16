@@ -10,10 +10,17 @@ const { movieModel } = require("../models/movieModel");
 
 
 router.get("/moviesData", async (req, res) => {
+    let defaultImg;
+    let location;
     let moviesData = []; //movies data array
     let data = await movieModel.find({});//gets the data from db
     data.forEach((obj) => {
-        let bitImg = fs.readFileSync(obj.location + '/' + obj.image);//gets the image data in binery
+        defaultImg = "Empty_Img.png";
+        location = 'G:/Movies&Series/Movies';
+        if (obj.image != defaultImg)
+            location = obj.location;
+
+        let bitImg = fs.readFileSync(location + '/' + obj.image);//gets the image data in binery
         objImg = new Buffer.from(bitImg).toString("base64");//convert tthe image from base 2 to base 64
 
         dataJson = {
@@ -33,7 +40,7 @@ router.get("/movie/:location", async (req, res) => {
     let path = req.params.location;
     path = path.replace("location=", "");
     path = path.replaceAll("+", " ");
-    // let data = await movieModel.find({ name: moveiName });
+
     const stat = fs.statSync(path);
     const fileSize = stat.size;
     const range = req.headers.range;

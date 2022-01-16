@@ -35,8 +35,8 @@ const Content = (props) => {
     };
     return (
         image ?
-            <img src={ (image) } onClick={ () => HandleClick() } className={ "ConentImage" }></img> : null
+            <div className="container"><img src={ (image) } onClick={ () => HandleClick() } className={ "ConentImage" }></img><div className="nameDiv">{ name }</div> </div> : null
         // <img src={ process.env.PUBLIC_URL + location + '/' + image } className={ "ConentImage" }></img>
     );
 };
-export default Content;
+export default Content;;;

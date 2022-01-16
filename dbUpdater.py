@@ -11,7 +11,7 @@ for dirpath, dirnames, filenames in os.walk(dirlocation):
     names = filenames
 
     for name in names:
-        image = ""
+        image = "Empty_Img.png"
         if 'mp4' in name:
             newName = name.replace('.mp4', "")
             for img in names:
@@ -23,7 +23,7 @@ for dirpath, dirnames, filenames in os.walk(dirlocation):
 
             dirpath = dirpath.replace("\\", "/")
             img = "G:/Movies&Series/Movies/Empty_Img.png"
-            obj = {"name": newName, "location": dirpath, "img": image}
+            obj = {"name": newName, "location": dirpath, "image": image}
             if image != "":
                 movieList.append(obj)
 
