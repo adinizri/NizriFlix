@@ -3,7 +3,7 @@ import os
 client = pymongo.MongoClient("localhost", 27017)  # mongo server address
 db = client["nizriFlix"]  # db name
 dbCol = db["Movies"]  # db collection
-dirlocation = 'G:/Movies&Series/Movies/all'  # source
+dirlocation = 'G:/Movies&Series/Movies/Genres'  # source
 movieList = []
 
 for dirpath, dirnames, filenames in os.walk(dirlocation):
@@ -23,9 +23,13 @@ for dirpath, dirnames, filenames in os.walk(dirlocation):
 
             dirpath = dirpath.replace("\\", "/")
             img = "G:/Movies&Series/Movies/Empty_Img.png"
-            obj = {"name": newName, "location": dirpath, "image": image}
+            dirpathSplits = dirpath.split("/")
+            # split the path between / and gets the genre name
+            genre = dirpathSplits[4]
+            obj = {"name": newName, "location": dirpath,
+                   "image": image, "genre": genre}
             if image != "":
                 movieList.append(obj)
 
+dbCol.delete_many({})  # clear collection
 dbCol.insert_many(movieList)  # add to collection
-# dbCol.delete_many({})  # clear collection

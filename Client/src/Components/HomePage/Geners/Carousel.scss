@@ -1,11 +1,11 @@
 .CarouselDiv{
     position: relative;
-    height: auto;
+   height: auto;
     min-height: 100% !important;
-    // height:22vh;
+   
      width: 95vw;
      margin: auto;
-    // padding-top: 2vh;
+    padding-top: 2vh;
 }
 .CarouselDiv:hover{
 
@@ -21,9 +21,11 @@
     background-color: rgb(209, 209, 209) !important;
     z-index: 1000;
 }
-.Title{
+
+.genreTitle{
     color: #e5e5e5;
     font-size: 1.8em;
+    font-weight: 600;
 }
 
 .swiper-button-prev:after, .swiper-button-next:after {   z-index: 1000;}
