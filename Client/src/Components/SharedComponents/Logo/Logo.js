@@ -1,4 +1,4 @@
-import logo from '../../Images/NizriFlix_Logo.png';
+import logo from '../../../Images/NizriFlix_Logo.png';
 import { useState, useEffect } from 'react';
 import './Logo.scss';
 

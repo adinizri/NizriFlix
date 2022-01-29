@@ -38,7 +38,10 @@ router.get("/moviesData", async (req, res) => {
         };
         moviesData.forEach((movieGenre) => {
 
-            if (obj.genre == movieGenre.genre) { movieGenre.MoviesListUpdater(dataJson); }
+            if (obj.genre.includes(movieGenre.genre)) {
+                console.log(obj.genre.includes(movieGenre.genre));
+                movieGenre.MoviesListUpdater(dataJson);
+            }
         });
 
     });

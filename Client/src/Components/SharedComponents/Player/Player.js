@@ -25,8 +25,9 @@ const Player = (props) => {
     }, []);
     return (
         source != "" ?
-
-            <ReactPlayer url={ source } width="60%" height="60%" controls={ true } /> : null
+            //<video url={ source } ></video>
+            <ReactPlayer url={ source } width="60%" height="60%" controls={ true } playIcon={ true } ></ReactPlayer>
+            : null
     );
 };
 export default Player;

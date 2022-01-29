@@ -1,9 +1,9 @@
 import logo from './logo.svg';
 import './App.scss';
 import { useState, useEffect } from 'react';
-import HomePage from './Components/HomePage/HomePage';
-import Logo from './Components/Logo/Logo';
-import Player from './Components/Player/Player';
+import HomePage from './Components/Pages/HomePage/HomePage';
+import Logo from './Components/SharedComponents/Logo/Logo';
+import Player from './Components/SharedComponents/Player/Player';
 const App = () => {
   const [playing, setPlaying] = useState(false);
   const [data, setData] = useState();
