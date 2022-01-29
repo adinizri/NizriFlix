@@ -35,11 +35,14 @@ for dirpath, dirnames, filenames in os.walk(dirlocation):
                     if found:
                         image = name+".png"
                     else:
+                        print("fail " + newName)
                         img = "G:/Movies&Series/Movies/Empty_Img.png"
 
-            dirpathSplits = dirpath.split("/")
+            # dirpathSplits = dirpath.split("/")
             # split the path between / and gets the genre name
             # genre = dirpathSplits[4]
+
+            #!!:
             moviesData = imdbDB.search_movie(newName)
 
             if(moviesData):
@@ -61,6 +64,9 @@ for dirpath, dirnames, filenames in os.walk(dirlocation):
                         print("Added "+newName)
                     else:
                         print("fail "+newName)
+
+ #!!:
+
             # print(movieData.data)
             # for genre in movieData.data['genres']:
             #     print(genre)
@@ -68,4 +74,3 @@ for dirpath, dirnames, filenames in os.walk(dirlocation):
 
 dbCol.delete_many({})  # clear collection
 dbCol.insert_many(movieList)  # add to collection
-print(movieList)
