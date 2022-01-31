@@ -10,7 +10,7 @@ import 'swiper/scss/pagination';
 import 'swiper/scss/scrollbar';
 const Carousel = (props) => {
     const [data, setData] = useState();
-    const [renderData, setRenderData] = useState();
+
     useEffect(() => {
         fetch('/movies/moviesData').then(res => {
             if (res.ok) {
@@ -26,9 +26,9 @@ const Carousel = (props) => {
 
     return (
         data ?
-            (data.map((movieGenre) => (
+            (data.map((videoGenre) => (
                 <div className={ "CarouselDiv" }>
-                    <h1 className="genreTitle">{ movieGenre.genre }</h1>
+                    <h1 className="genreTitle">{ videoGenre.genre }</h1>
                     <Swiper
 
                         // install Swiper modules
@@ -47,8 +47,8 @@ const Carousel = (props) => {
                         observeParents={ true }
                     >
 
-                        { movieGenre.moviesList.map(obj => <SwiperSlide >
-                            <Content isPlaying={ props.isPlaying } getData={ props.getData } image={ obj.image } location={ obj.location } name={ obj.name }></Content>
+                        { videoGenre.moviesList.map(obj => <SwiperSlide >
+                            <Content getData={ props.getData } image={ obj.image } location={ obj.location } name={ obj.name }></Content>
                         </SwiperSlide>) }
 
 

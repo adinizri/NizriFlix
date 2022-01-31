@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { createContext, useState, useEffect, useContext, useMemo } from 'react';
 import Styles from './Content.css';
+import { playerContext } from '../../../../../App';
 // import images from '../../../../../public/Movies&Series/Movies/all';
 
 
@@ -7,6 +8,7 @@ const Content = (props) => {
     const [image, setImage] = useState();
     const [name, setName] = useState();
     const [location, setLocation] = useState();//location of the content
+    const setPlaying = useContext(playerContext);
 
     useEffect(() => {
         setImage("data:image/jfif;base64," + props.image);
@@ -29,7 +31,8 @@ const Content = (props) => {
 
     const HandleClick = () => {
         props.getData({ name: name, location: location });
-        props.isPlaying();
+        //props.isPlaying();
+        setPlaying(true);
 
 
     };

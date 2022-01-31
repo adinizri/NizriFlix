@@ -1,7 +1,7 @@
 import os
 
-dirlocation = 'G:/Movies&Series/Movies/Genres'
-for dirpath, dirnames, filenames in os.walk('G:/Movies&Series/Movies/Genres'):
+dirlocation = 'G:/Movies&Series/Movies'
+for dirpath, dirnames, filenames in os.walk('G:/Movies&Series/Movies'):
     names = filenames
     for name in names:
         newName = name

@@ -8,7 +8,7 @@ imdbDB = IMDb()
 client = pymongo.MongoClient("localhost", 27017)  # mongo server address
 db = client["nizriFlix"]  # db name
 dbCol = db["Movies"]  # db collection
-dirlocation = 'G:/Movies&Series/Movies/Genres'  # source
+dirlocation = 'G:/Movies&Series/Movies'  # source
 movieList = []
 
 for dirpath, dirnames, filenames in os.walk(dirlocation):
@@ -18,9 +18,12 @@ for dirpath, dirnames, filenames in os.walk(dirlocation):
     for name in names:
         image = "Empty_Img.png"
         dirpath = dirpath.replace("\\", "/")
+
         if '.mp4' in name:
+
             found = False
             newName = name.replace('.mp4', "")
+            dbData = (dbCol.find_one({"name": newName}))
             # check if img exist with the same name
             if(newName+".png" in names or newName+".jfif" in names or newName+".jpng" in names):
                 for img in names:
@@ -33,7 +36,7 @@ for dirpath, dirnames, filenames in os.walk(dirlocation):
                 if(newName+".png" not in names and newName+".jfif" not in names and newName+".jpng" not in names):
                     found = downloadFromGoogle(newName, dirpath)
                     if found:
-                        image = name+".png"
+                        image = newName+".png"
                     else:
                         print("fail " + newName)
                         img = "G:/Movies&Series/Movies/Empty_Img.png"
@@ -43,10 +46,12 @@ for dirpath, dirnames, filenames in os.walk(dirlocation):
             # genre = dirpathSplits[4]
 
             #!!:
-            moviesData = imdbDB.search_movie(newName)
 
-            if(moviesData):
-                movieId = -1
+            genre = "Not Listed"
+            if dbData == None:  # check if data not exist in db
+                moviesData = imdbDB.search_movie(newName)
+                if(moviesData):
+                    movieId = -1
                 for movie in moviesData:
 
                     if movie.data['kind'] == 'movie' or movie.data['kind'] == 'video movie':
@@ -54,18 +59,21 @@ for dirpath, dirnames, filenames in os.walk(dirlocation):
                         break
                 if movieId != -1:
                     movieData = imdbDB.get_movie(movieId)
-                else:
-                    print("can't find "+newName)
-                if('genres' in movieData.data and movieId != -1):
-                    obj = {"name": newName, "location": dirpath,
-                           "image": image, "genre": movieData.data['genres']}
-                    if image != "":
-                        movieList.append(obj)
-                        print("Added "+newName)
-                    else:
-                        print("fail "+newName)
+                    if('genres' in movieData.data):
+                        genre = movieData.data['genres']
 
- #!!:
+            else:  # if exist
+
+                genre = dbData["genre"]
+
+            obj = {"name": newName, "location": dirpath,
+                   "image": image, "genre": genre}
+            if image != "":
+                movieList.append(obj)
+                print("Added "+newName)
+            else:
+                print("fail "+newName)
+   #!!:
 
             # print(movieData.data)
             # for genre in movieData.data['genres']:
