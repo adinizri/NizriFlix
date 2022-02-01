@@ -5,21 +5,22 @@ import CarouselContainer from './Components/SharedComponents/CarouselContainer/C
 import Logo from './Components/SharedComponents/Logo/Logo';
 import Player from './Components/SharedComponents/Player/Player';
 import { Router } from 'react-router-dom';
+import { videoData } from './Contexts/Contexts';
 
 
-export const playerContext = createContext();//create context
 const App = () => {
   const [playing, setPlaying] = useState(false);
   const [data, setData] = useState();
 
 
 
-  const isPlaying = () => {
-    setPlaying(true);
-  };
-  const getData = (data) => {
-    setData(data);
-  };
+
+  // const isPlaying = () => {
+  //   setPlaying(true);
+  // };
+  // const getData = (data) => {
+  //   setData(data);
+  // };
   return (<>
     <Logo></Logo>
     {/* <Router>
@@ -36,7 +37,7 @@ const App = () => {
     <div className='appContainer'>
 
       { playing ? <Player data={ data } ></Player> :
-        <playerContext.Provider value={ setPlaying }><CarouselContainer isPlaying={ isPlaying } getData={ getData }></CarouselContainer> </playerContext.Provider> }
+        <videoData.Provider value={ { setPlaying: setPlaying, setData: setData } }><CarouselContainer ></CarouselContainer> </videoData.Provider> }
 
 
     </div>
