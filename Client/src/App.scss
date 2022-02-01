@@ -11,3 +11,32 @@
     /* height: auto; */
     min-height: 100% !important;
 }
+
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+
+ 
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+li a:hover {
+  color: rgb(209, 209, 209);
+}
+.logeContainer{
+  width: 5vw;
+}
