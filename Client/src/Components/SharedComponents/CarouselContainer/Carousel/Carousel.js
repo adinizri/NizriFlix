@@ -12,7 +12,7 @@ const Carousel = (props) => {
     const [data, setData] = useState();
 
     useEffect(() => {
-        fetch('/movies/moviesData').then(res => {
+        fetch('/movies/GetMovies').then(res => {
             if (res.ok) {
                 return res.json();
             }
@@ -48,7 +48,7 @@ const Carousel = (props) => {
                     >
 
                         { videoGenre.moviesList.map(obj => <SwiperSlide >
-                            <Content getData={ props.getData } image={ obj.image } location={ obj.location } name={ obj.name }></Content>
+                            <Content image={ obj.image } location={ obj.location } name={ obj.name }></Content>
                         </SwiperSlide>) }
 
 

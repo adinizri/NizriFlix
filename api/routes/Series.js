@@ -3,31 +3,31 @@ var express = require('express');
 var fs = require('fs');
 const path = require('path');
 var readimage = require("readimage");
-const MoviesGenre = require('../controllers/MoviesGenre');
+const SeriesGenre = require('../controllers/SeriesGenre');
 
 var router = express.Router();
-const { movieModel } = require("../models/movieModel");
+const { episodeModel } = require("../models/episodeModel");
 
 
 
 
-router.get("/GetMovies", async (req, res) => {
+router.get("/GetSeries", async (req, res) => {
     let defaultImg;
     let location;
-    let moviesData = []; //movies data array
-    let genres = await movieModel.distinct('genre', {});// gets the genres from the db
-    let data = await movieModel.find({});//gets the data from db
+    let seriesData = []; //Series data array
+    let genres = await episodeModel.distinct('genre', {});// gets the genres from the db
+    let data = await episodeModel.find({});//gets the data from db
     genres.map((genre) => {
 
-        moviesData.push(new MoviesGenre(genre));
+        seriesData.push(new SeriesGenre(genre));
     });
     data.forEach((obj) => {
         defaultImg = "Empty_Img.png";
-        imageLocation = 'G:/Movies&Series/Movies';
+        location = 'G:/Movies&Series/Series';// Series location on hard drive
         if (obj.image != defaultImg)
-            imageLocation = obj.location;
+            location = obj.location;
 
-        let bitImg = fs.readFileSync(imageLocation + '/' + obj.image);//gets the image data in binery
+        let bitImg = fs.readFileSync(location + '/' + obj.image);//gets the image data in binery
         objImg = new Buffer.from(bitImg).toString("base64");//convert tthe image from base 2 to base 64
 
         dataJson = {
@@ -36,28 +36,28 @@ router.get("/GetMovies", async (req, res) => {
             name: obj.name, //movie name
             genre: obj.genre
         };
-        moviesData.forEach((movieGenre) => {
+        seriesData.forEach((seriesGenre) => {
 
-            if (obj.genre.includes(movieGenre.genre)) {
-                console.log(obj.genre.includes(movieGenre.genre));
-                movieGenre.MoviesListUpdater(dataJson);
+            if (obj.genre.includes(seriesGenre.genre)) {
+                console.log(obj.genre.includes(seriesGenre.genre));
+                seriesGenre.MoviesListUpdater(dataJson);
             }
         });
 
     });
-    console.log(moviesData);
-    res.json(moviesData);//sending response
+    console.log(seriesData);
+    res.json(seriesData);//sending response
 });
 module.exports = router;
 
 
-router.get("/movie/:location", async (req, res) => {
-    // const path = 'G:/Movies&Series/Movies/Genres/Black Panther/Black Panther.mp4';
-    let path = req.params.location;
-    path = path.replace("location=", "");
-    path = path.replaceAll("+", " ");
+router.get("/episodes/:location", async (req, res) => {
 
-    const stat = fs.statSync(path);
+    let path = req.params.location; // video location from parameter
+    path = path.replace("location=", "");
+    path = path.replaceAll("+", " ");// cleaning the the path
+
+    const stat = fs.statSync(path);// acccessing the video
     const fileSize = stat.size;
     const range = req.headers.range;
     if (range) {

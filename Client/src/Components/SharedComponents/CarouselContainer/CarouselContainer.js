@@ -9,7 +9,7 @@ const HomePage = (props) => {
     return (
         <div className={ "HomePageDiv" }>
 
-            <Carousel getData={ props.getData }></Carousel>
+            <Carousel ></Carousel>
         </div>
     );
 };
