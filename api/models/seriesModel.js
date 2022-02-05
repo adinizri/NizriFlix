@@ -5,7 +5,8 @@ const seiresSchema = new mongoose.Schema({
     image: { type: String },
     name: { type: String },
     location: { type: String },
-    genre: { type: Array }
+    genre: { type: Array },
+    seasons: { type: Number }
 
 });
 

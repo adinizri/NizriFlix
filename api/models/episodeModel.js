@@ -1,16 +1,16 @@
 const mongoose = require("mongoose");
 
-const episodesSchema = new mongoose.Schema({
+const episodeSchema = new mongoose.Schema({
 
     location: { type: String },
     seriesName: { type: String },
     episodeName: { type: String },
-    episode: { type: Number },
-    season: { type: Number },
+    episode: { type: String },
+    season: { type: String },
 
 
 });
 
-const episodesSchema = mongoose.model("episodes", episodesSchema, "Episodes");
+const episodeModel = mongoose.model("Episode", episodeSchema, "Episodes");
 
-exports.episodesSchema = episodesSchema;
+exports.episodeModel = episodeModel;

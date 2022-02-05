@@ -15,6 +15,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var testAPI = require('./routes/TestApi');
 var movies = require('./routes/movies');
+var series = require('./routes/Series');
 
 
 app.use(logger('dev'));
@@ -29,6 +30,8 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/api', testAPI);
 app.use('/movies', movies);
+app.use('/Series', series);
+
 
 
 

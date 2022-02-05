@@ -1,19 +1,26 @@
 import os
-
-dirlocation = 'G:/Movies&Series/Movies'
-for dirpath, dirnames, filenames in os.walk('G:/Movies&Series/Movies'):
+import re
+dirlocation = 'G:/Movies&Series'
+for dirpath, dirnames, filenames in os.walk(dirlocation):
     names = filenames
     for name in names:
         newName = name
         if 'TorrentPart' in newName:
             os.remove(dirpath+os.sep+name)
         else:
-            if ".jfif" not in newName and ".png" not in newName:
-                newName = newName.replace(".", " ")  # replace dot in space
+            dirpath = dirpath.replace("\\", "/")
+            if ".jfif" not in newName and ".png" not in newName and ".srt" not in newName:
                 newName = newName.replace("[", "")
                 newName = newName.replace("]", "")
-                if 'mp4' in newName:  # fixing initial problems
-                    newName = newName.replace("mp4", "")
+
+                if '.mp4' in newName or '.mkv' in newName:  # fixing initial problems
+
+                    newName = newName.replace(".mp4", "")
+                    newName = newName.replace(".mkv", "")  # handle videos
+                    newName = newName.replace(".", " ")  # replace dot in space
+                    newName = newName.replace("_", " ")  # replace dot in space
+                    if('/Series/' in dirpath):
+                        newName = re.sub("[\(\[].*?[\)\]]", " ", newName)
 
                     if '1080p' in newName:
                         newName = newName.replace(
@@ -23,11 +30,10 @@ for dirpath, dirnames, filenames in os.walk('G:/Movies&Series/Movies'):
                             (newName[newName.index('720p'):len(newName)-1]), "")
 
                     newName += ".mp4"
+                    newName = newName.replace(" .mp4", ".mp4")
 
-                elif '4' == newName[-1] and not 'str' in newName:
-                    newName = newName.replace("4", ".mp4")
-
-                if '.srt' in newName:
+                elif '.srt' in newName:  # handle subs
+                    newName = newName.replace(".srt", "")
                     if 'mp4' in newName:  # fixing initial problems
                         newName = newName.replace(".mp4", "")
                     if '1080p' in newName:
@@ -38,15 +44,16 @@ for dirpath, dirnames, filenames in os.walk('G:/Movies&Series/Movies'):
                         newName = newName.replace(
                             (newName[newName.index('720p'):len(newName)-1]), "")
 
-                    else:
-                        newName = newName.replace(' srt', "")
-                        if not('.srt' in newName):
-                            newName += '.srt'
+                    if not('.srt' in newName):
+                        newName += '.srt'
+                else:  # handle the rest
+                    if ".jfif" not in newName and ".png" not in newName and ".srt" not in newName:
+                        newName = newName.replace(
+                            ".", " ")  # replace dot in space
+
                 # if '-heb srt' in newName: #fixed one time bug
                 #     newName = newName.replace("-heb srt", "-heb.srt")
                 newName = newName.replace("  ", "")
-                if ' .mp4' in newName:
-                    newName = newName.replace(" .mp4", ".mp4")
-
                 print(name + "=>" + newName)
-                os.rename(dirpath+os.sep+name, dirpath+os.sep + newName)
+
+                os.rename(dirpath+"/"+name, dirpath+"/" + newName)

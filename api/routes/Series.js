@@ -3,10 +3,12 @@ var express = require('express');
 var fs = require('fs');
 const path = require('path');
 var readimage = require("readimage");
+const Season = require('../controllers/Season');
+const Series = require('../controllers/Series');
 const SeriesGenre = require('../controllers/SeriesGenre');
-
 var router = express.Router();
 const { episodeModel } = require("../models/episodeModel");
+const { seriesModel } = require("../models/seriesModel");
 
 
 
@@ -14,39 +16,60 @@ const { episodeModel } = require("../models/episodeModel");
 router.get("/GetSeries", async (req, res) => {
     let defaultImg;
     let location;
-    let seriesData = []; //Series data array
-    let genres = await episodeModel.distinct('genre', {});// gets the genres from the db
-    let data = await episodeModel.find({});//gets the data from db
+    let seriesDataByGenre = []; //Series data array
+    let genres = await seriesModel.distinct('genre', {}); //gets the genres from the db
+    let SeriesDbData = await seriesModel.find({}); //gets the data from db
+    episodesDbData = await episodeModel.find();
     genres.map((genre) => {
 
-        seriesData.push(new SeriesGenre(genre));
+        seriesDataByGenre.push(new SeriesGenre(genre));
     });
-    data.forEach((obj) => {
+    SeriesDbData.map((s) => {
+        series = new Series(s.name, s.genre);
+        for (let i = 1; i < s.seasons; i++) {
+
+            season = new Season(s.name, i);
+            seasonEpisodes = episodesDbData.filter(epi => epi.seriesName == s.name && epi.season == i);
+            season.EpisodesUpdater(seasonEpisodes);
+            series.SeasonsUpdater(season);
+
+        }
+
+
+
+
         defaultImg = "Empty_Img.png";
         location = 'G:/Movies&Series/Series';// Series location on hard drive
-        if (obj.image != defaultImg)
-            location = obj.location;
 
-        let bitImg = fs.readFileSync(location + '/' + obj.image);//gets the image data in binery
-        objImg = new Buffer.from(bitImg).toString("base64");//convert tthe image from base 2 to base 64
+        if (s.image != defaultImg)
+            location = s.location;
 
-        dataJson = {
-            location: obj.location, //the data location 
-            image: objImg,//img in base 64
-            name: obj.name, //movie name
-            genre: obj.genre
-        };
-        seriesData.forEach((seriesGenre) => {
+        let bitImg = fs.readFileSync(location + '/' + s.image);//gets the image data in binery
+        sImg = new Buffer.from(bitImg).toString("base64");//convert tthe image from base 2 to base 64
 
-            if (obj.genre.includes(seriesGenre.genre)) {
-                console.log(obj.genre.includes(seriesGenre.genre));
-                seriesGenre.MoviesListUpdater(dataJson);
+        // dataJson = {
+        //     location: s.location, //the video location 
+        //     image: sImg,//img in base 64
+        //     name: s.name, //movie name
+        //     genre: s.genre,
+        //     seasons: JSON.stringify(series.GetSeasons)
+        // };
+        series.SetImage(sImg);
+        seriesDataByGenre.forEach((seriesGenre) => {
+
+            if (s.genre.includes(seriesGenre.genre)) {
+                seriesGenre.SeriesListUpdater(series);
             }
         });
-
     });
-    console.log(seriesData);
-    res.json(seriesData);//sending response
+
+
+
+    //res.json(seriesDataByGenre);//sending response
+
+    res.json(seriesDataByGenre);
+
+
 });
 module.exports = router;
 

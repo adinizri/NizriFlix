@@ -14,12 +14,12 @@ const { movieModel } = require("../models/movieModel");
 router.get("/GetMovies", async (req, res) => {
     let defaultImg;
     let location;
-    let moviesData = []; //movies data array
+    let moviesDataByGenres = []; //movies data array in every genre
     let genres = await movieModel.distinct('genre', {});// gets the genres from the db
     let data = await movieModel.find({});//gets the data from db
     genres.map((genre) => {
 
-        moviesData.push(new MoviesGenre(genre));
+        moviesDataByGenres.push(new MoviesGenre(genre));
     });
     data.forEach((obj) => {
         defaultImg = "Empty_Img.png";
@@ -30,23 +30,23 @@ router.get("/GetMovies", async (req, res) => {
         let bitImg = fs.readFileSync(imageLocation + '/' + obj.image);//gets the image data in binery
         objImg = new Buffer.from(bitImg).toString("base64");//convert tthe image from base 2 to base 64
 
-        dataJson = {
-            location: obj.location, //the data location 
+        movieDataJson = {
+            location: obj.location, //the video location 
             image: objImg,//img in base 64
             name: obj.name, //movie name
             genre: obj.genre
         };
-        moviesData.forEach((movieGenre) => {
+        moviesDataByGenres.forEach((movieGenre) => {
 
             if (obj.genre.includes(movieGenre.genre)) {
                 console.log(obj.genre.includes(movieGenre.genre));
-                movieGenre.MoviesListUpdater(dataJson);
+                movieGenre.MoviesListUpdater(movieDataJson);
             }
         });
 
     });
-    console.log(moviesData);
-    res.json(moviesData);//sending response
+    console.log(moviesDataByGenres);
+    res.json(moviesDataByGenres);//sending response
 });
 module.exports = router;
 

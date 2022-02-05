@@ -14,10 +14,11 @@ class SeriesGenre {
         this.seriesList = seriesList;
     }
 
-    SeriesListUpdater (movie) {
-        this.seriesList.push(movie);
+    SeriesListUpdater (series) {
+        this.seriesList.push(series);
     }
 
 
 }
+
 module.exports = SeriesGenre;
