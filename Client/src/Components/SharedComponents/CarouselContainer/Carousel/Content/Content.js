@@ -40,17 +40,25 @@ const Content = (props) => {
     // }
 
     const HandleClick = () => {
-        debugger;
+
 
         setVideo({ name: name, location: location });
         if (location) {
             // replace space in name for url name
             navigate("/Player/" + name.replaceAll(" ", "%20"), {
                 state: {
-                    name: name, location: location
+                    name: name, location: location, isMovie: true
                 }
             });
         }
+        else {
+            navigate("/Player/" + name.replaceAll(" ", "%20"), {
+                state: {
+                    name: seasons[0]['episodes'][0][1]['episodeName'], location: seasons[0]['episodes'][0][1]['location'], isMovie: false
+                }
+            });
+        };
+
 
     };
     return (

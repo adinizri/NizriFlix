@@ -142,6 +142,7 @@ for seriesName in seriesNamesList:
                     season = digits[0]
                     episode = digits[1]
                     newDirpath = dirpath.replace('\\', "/")
+
                     if(season != -1 and episode != -1):
                         if episode[0] == '0':
                             episode = episode[1]
@@ -155,7 +156,7 @@ for seriesName in seriesNamesList:
                             genre = genreAndEpisodes["genre"]
                             episodes = genreAndEpisodes["episodes"]
                         if(episodeDbData == None):
-                            epiobj = {"seriesName": seriesName, "location": dirpath, "episodeName": newName, "episodeTitle": (episodes[int(season)][int(episode)]).data['title'], "seriesLocation": seriesPath,
+                            epiobj = {"seriesName": seriesName, "location": newDirpath, "episodeName": newName, "episodeTitle": (episodes[int(season)][int(episode)]).data['title'], "seriesLocation": seriesPath,
                                       "episode": episode, "season": season}
                             episodesList.append(epiobj)
                             print("Added "+seriesName +

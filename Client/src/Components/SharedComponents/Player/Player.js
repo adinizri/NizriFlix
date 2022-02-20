@@ -16,26 +16,45 @@ const Player = (props) => {
     useEffect(() => {
         if (location) {
             const path = location.state.location + "/" + location.state.name + ".mp4"; //making the video relativ path
-            fetch('/movies/movie/' + new URLSearchParams({
-                location: path
-            }), { method: 'GET' }).then(res => {
-                //, { method: 'GET', body: JSON.stringify(path) }
-                if (res.ok) {
+            if (location.state.isMovie) {
 
-                    setSource('/movies/movie/' + new URLSearchParams({ location: path }));
-                }
-            }).then(jsonResponse => {
+                fetch('/movies/movie/' + new URLSearchParams({
+                    location: path
+                }), { method: 'GET' }).then(res => {
+                    //, { method: 'GET', body: JSON.stringify(path) }
+                    if (res.ok) {
+
+                        setSource('/movies/movie/' + new URLSearchParams({ location: path }));
+                    }
+                }).then(jsonResponse => {
 
 
 
-            });
+                });
 
+            }
+            else {
+
+                fetch('/Series/episodes/' + new URLSearchParams({
+                    location: path
+                }), { method: 'GET' }).then(res => {
+                    //, { method: 'GET', body: JSON.stringify(path) }
+                    if (res.ok) {
+
+                        setSource('/Series/episodes/' + new URLSearchParams({ location: path }));
+                    }
+                }).then(jsonResponse => {
+
+
+
+                });
+            }
         }
     }, []);
     return (
         source != "" ?
             //<video url={ source } ></video>
-            <ReactPlayer url={ source } width="60%" height="60%" controls={ true } playIcon={ true } ></ReactPlayer>
+            <video src={ source } width="60%" height="60%" controls={ true } playIcon={ true } type="video/ogg" ></video>
             : null
     );
 };
