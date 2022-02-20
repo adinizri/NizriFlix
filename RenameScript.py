@@ -9,7 +9,7 @@ for dirpath, dirnames, filenames in os.walk(dirlocation):
             os.remove(dirpath+os.sep+name)
         else:
             dirpath = dirpath.replace("\\", "/")
-            if ".jfif" not in newName and ".png" not in newName and ".srt" not in newName:
+            if ".jfif" not in newName and ".png" not in newName and ".srt" not in newName and ".jpg" not in newName:
                 newName = newName.replace("[", "")
                 newName = newName.replace("]", "")
 

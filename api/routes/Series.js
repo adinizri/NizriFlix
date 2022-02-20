@@ -58,7 +58,7 @@ router.get("/GetSeries", async (req, res) => {
         seriesDataByGenre.forEach((seriesGenre) => {
 
             if (s.genre.includes(seriesGenre.genre)) {
-                seriesGenre.SeriesListUpdater(series);
+                seriesGenre.ListUpdater(series);
             }
         });
     });

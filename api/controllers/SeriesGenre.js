@@ -2,20 +2,20 @@
 class SeriesGenre {
     constructor (genre) {
         this.genre = genre;
-        this.seriesList = [];
+        this.List = [];//the seires list (general name to fit both movie and series)
     }
     get GetGenre () {
         return this.genre;
     }
-    get GetSeriesList () {
-        return this.seriesList;
+    get GetList () {
+        return this.List;
     }
-    set SetmSeriesList (SeriesList) {
-        this.seriesList = seriesList;
+    set SetmList (List) {
+        this.List = List;
     }
 
-    SeriesListUpdater (series) {
-        this.seriesList.push(series);
+    ListUpdater (series) {
+        this.List.push(series);
     }
 
 

@@ -2,13 +2,23 @@
  
     border-radius: 7px;
    width: 18vw; 
-  height: 20vh;
+  height: 19vh;
     
 }
-.ConentImage:hover
+
+.contentWarrper{
+  width: 20vw;
+  height: 24vh;
+}
+.contentWarrper:hover{
+  transform: scale(1.2);
+  transition: transform .25s ease; 
+  cursor: pointer;
+}
+/* .ConentImage:hover
 {
   border-radius: 7px;
-  cursor: pointer;
+
    width: 20vw;
   height: 24vh;
   /* margin-right: 20vw; */
@@ -16,18 +26,21 @@
   /* position: inherit;
   margin-right: 2vw; 
   transform: scale(1.2);
-  transition: transform .25s ease; */
-}
+  transition: transform .25s ease; 
+} */
 .nameDiv{
   font-size: larger;
   color: rgb(211, 209, 209);
 }
 .container{
   margin-bottom: 2vh;
+  width: 18vw;
+  height: 25vh;
+  cursor: pointer;
 }
-.container:hover{
+/* .container:hover{
   position: inherit;
   margin-right: 2vw; 
   transform: scale(1.2);
   transition: transform .25s ease;
-}
+} */

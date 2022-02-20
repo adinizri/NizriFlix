@@ -40,7 +40,7 @@ router.get("/GetMovies", async (req, res) => {
 
             if (obj.genre.includes(movieGenre.genre)) {
                 console.log(obj.genre.includes(movieGenre.genre));
-                movieGenre.MoviesListUpdater(movieDataJson);
+                movieGenre.ListUpdater(movieDataJson);
             }
         });
 

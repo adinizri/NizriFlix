@@ -36,7 +36,12 @@ li a {
 }
 li a:hover {
   color: rgb(209, 209, 209);
+  cursor: pointer !important;
 }
 .logeContainer{
   width: 5vw;
+  :hover{
+    transform: scale(1.2);
+    transition: transform .25s ease; 
+  }
 }

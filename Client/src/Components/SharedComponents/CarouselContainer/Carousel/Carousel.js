@@ -9,19 +9,19 @@ import 'swiper/scss/navigation';
 import 'swiper/scss/pagination';
 import 'swiper/scss/scrollbar';
 const Carousel = (props) => {
-    const [data, setData] = useState();
+    const [data, setData] = useState(props.genres);
 
-    useEffect(() => {
-        fetch('/movies/GetMovies').then(res => {
-            if (res.ok) {
-                return res.json();
-            }
-        }).then(jsonResponse => {
-            setData(jsonResponse);
+    // useEffect(() => {
+    //     fetch('/movies/GetMovies').then(res => {
+    //         if (res.ok) {
+    //             return res.json();
+    //         }
+    //     }).then(jsonResponse => {
+    //         setData(jsonResponse);
 
 
-        });
-    }, []);
+    //     });
+    // }, []);
 
 
     return (
@@ -47,8 +47,8 @@ const Carousel = (props) => {
                         observeParents={ true }
                     >
 
-                        { videoGenre.moviesList.map(obj => <SwiperSlide >
-                            <Content image={ obj.image } location={ obj.location } name={ obj.name }></Content>
+                        { videoGenre.List.map(obj => <SwiperSlide >
+                            <Content data={ obj }></Content>
                         </SwiperSlide>) }
 
 

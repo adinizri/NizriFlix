@@ -1,0 +1,23 @@
+.ConentImage{
+   width: 18vw; 
+  height: 19vh;
+  display: block;
+  z-index: 1000;
+}
+.nameDiv{
+    font-size: larger;
+    color: rgb(211, 209, 209);
+    z-index: 1000;
+  }
+.ContentVideoModelContainer{
+    z-index: 1000;
+    height: 30vh;
+    width: 28vw;
+    background-color:"#141414";
+}  
+
+.modelButton{
+  border-radius: 20px;
+  background-color: transparent;
+  border-color: rgb(54, 54, 54)!important;
+}

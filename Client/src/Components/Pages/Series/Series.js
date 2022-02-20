@@ -2,16 +2,12 @@ import CarouselContainer from '../../SharedComponents/CarouselContainer/Carousel
 import Player from '../../SharedComponents/Player/Player';
 import { videoData } from '../../../Contexts/Contexts';
 import { createContext, useState, useEffect, useContext, useMemo } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom';
-
-
-const Movies = () => {
-
+const Series = () => {
     const [playing, setPlaying] = useState(false);
-    // const [video, setVideo] = useState();
+    const [video, setVideo] = useState();
     const [genres, setGenres] = useState();
     useEffect(() => {
-        fetch('/movies/GetMovies').then(res => {
+        fetch('/Series/GetSeries').then(res => {
             if (res.ok) {
                 return res.json();
             }
@@ -23,11 +19,10 @@ const Movies = () => {
     }, []);
 
 
-
     return (
         (genres ?
             <videoData.Provider value={ { setPlaying: setPlaying } }><CarouselContainer genres={ genres } ></CarouselContainer> </videoData.Provider>
             : null)
     );
 };
-export default Movies;
+export default Series;

@@ -5,6 +5,8 @@ import { createContext, useState, useEffect, useContext, useMemo } from 'react';
 
 import Logo from './Components/SharedComponents/Logo/Logo';
 import Movies from './Components/Pages/Movies/Movies';
+import Series from './Components/Pages/Series/Series';
+import Player from './Components/SharedComponents/Player/Player';
 import { videoData } from './Contexts/Contexts';
 import ReactDOM from "react-dom";
 
@@ -37,6 +39,8 @@ const App = () => {
         </ul>
         <Routes>
           <Route exact path='/Movies' element={ < Movies /> }></Route>
+          <Route exact path='/Series' element={ < Series /> }></Route>
+          <Route path={ '/Player/:videoName' } element={ <Player /> } > </Route>
 
         </Routes>
 
