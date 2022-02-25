@@ -1,7 +1,7 @@
 .ConentImage{
  
     border-radius: 7px;
-   width: 18vw; 
+   width: 17vw; 
   height: 19vh;
     
 }
@@ -37,6 +37,7 @@
   width: 18vw;
   height: 25vh;
   cursor: pointer;
+  position: relative;
 }
 /* .container:hover{
   position: inherit;

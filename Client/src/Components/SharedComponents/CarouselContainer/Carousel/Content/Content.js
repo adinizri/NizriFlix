@@ -5,7 +5,9 @@ import { videoData } from '../../../../../Contexts/Contexts';
 import ContentVideoModel from './ContentVideoModel/ContentVideoModel';
 // import images from '../../../../../public/Movies&Series/Movies/all';
 import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom';
-import Player from '../../../Player/Player';
+import SeriesModal from '../../../SeriesModal/SeriesModal';
+
+
 
 const Content = (props) => {
     const navigate = useNavigate();
@@ -14,9 +16,11 @@ const Content = (props) => {
     const [location, setLocation] = useState();//location of the content
     const [seasons, setSeasons] = useState();//location of the content
     const [isMiniModelOpen, setIsMiniModelOpen] = useState(false);
-    const [isBigModelOpen, setIsBigModelOpen] = useState(false);
+
     const [video, setVideo] = useState();
-    const { setPlaying } = useContext(videoData);
+
+    const { setData, openModal } = useContext(videoData);
+
 
     useEffect(() => {
         setImage("data:image/jfif;base64," + props.data.image);
@@ -30,19 +34,14 @@ const Content = (props) => {
     const OpenMiniModel = () => {
         setIsMiniModelOpen(true);
     };
-    // function toBase64 (arr) {
-    //     //arr = new Uint8Array(arr) if it's an ArrayBuffer
-    //     return btoa(
-    //         arr.reduce((data, byte) => data + String.fromCharCode(byte), '')
 
-    //     );
-    //     console.log(arr);
-    // }
 
     const HandleClick = () => {
 
 
         setVideo({ name: name, location: location });
+
+        //for movies
         if (location) {
             // replace space in name for url name
             navigate("/Player/" + name.replaceAll(" ", "%20"), {
@@ -52,26 +51,31 @@ const Content = (props) => {
             });
         }
         else {
-            navigate("/Player/" + name.replaceAll(" ", "%20"), {
-                state: {
-                    name: seasons[0]['episodes'][0][1]['episodeName'], location: seasons[0]['episodes'][0][1]['location'], isMovie: false
-                }
-            });
-        };
 
+            openModal();
+            let data = props.data;
+            data.image = "data:image/jfif;base64," + props.data.image;
+            setData(data);
+
+        }
 
     };
+
+
     return (
         image ?
+            <>
 
-            <div className="container"
-            // onMouseOver={ () => setIsMiniModelOpen(true) } onMouseOut={ () => setIsMiniModelOpen(false) }
-            >
-                {/* { isMiniModelOpen ? <ContentVideoModel data={ props.data }></ContentVideoModel> :*/ }
-                <div className='contentWarrper'><img src={ (image) } onClick={ () => HandleClick() } className={ "ConentImage" }></img>   <div className="nameDiv">{ name }</div>
+                <div className="container"
+                // onMouseOver={ () => setIsMiniModelOpen(true) } onMouseOut={ () => setIsMiniModelOpen(false) }
+                >
+                    {/* { isMiniModelOpen ? <ContentVideoModel data={ props.data }></ContentVideoModel> :*/ }
+                    <div className='contentWarrper'><img src={ (image) } onClick={ () => HandleClick() } className={ "ConentImage" }></img>   <div className="nameDiv">{ name }</div>
+                    </div>
+                    {/* <SeriesModal show={ isBigModelOpen } handleClose={ hideModal } /> */ }
                 </div>
-            </div>
 
+            </>
             : null
         // <img src={ process.env.PUBLIC_URL + location + '/' + image } className={ "ConentImage" }></img>
     );

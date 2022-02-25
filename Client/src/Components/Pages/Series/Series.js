@@ -2,10 +2,22 @@ import CarouselContainer from '../../SharedComponents/CarouselContainer/Carousel
 import Player from '../../SharedComponents/Player/Player';
 import { videoData } from '../../../Contexts/Contexts';
 import { createContext, useState, useEffect, useContext, useMemo } from 'react';
+import SeriesModal from '../../SharedComponents/SeriesModal/SeriesModal';
 const Series = () => {
-    const [playing, setPlaying] = useState(false);
-    const [video, setVideo] = useState();
+
     const [genres, setGenres] = useState();
+    const [modalData, setmodalData] = useState();
+    const [isModalOpen, setIsModalOpen] = useState();
+
+    const setData = (data) => {
+        setmodalData(data);
+    };
+    const openModal = () => {
+        setIsModalOpen(true);
+    };
+    const closeModal = () => {
+        setIsModalOpen(false);
+    };
     useEffect(() => {
         fetch('/Series/GetSeries').then(res => {
             if (res.ok) {
@@ -21,7 +33,10 @@ const Series = () => {
 
     return (
         (genres ?
-            <videoData.Provider value={ { setPlaying: setPlaying } }><CarouselContainer genres={ genres } ></CarouselContainer> </videoData.Provider>
+            <>
+                <videoData.Provider value={ { openModal, setData } }><CarouselContainer genres={ genres } ></CarouselContainer> </videoData.Provider>
+                { isModalOpen ? <SeriesModal show={ isModalOpen } handleClose={ closeModal } data={ modalData } ></SeriesModal> : null }
+            </>
             : null)
     );
 };

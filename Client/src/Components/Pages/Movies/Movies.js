@@ -7,9 +7,10 @@ import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react
 
 const Movies = () => {
 
-    const [playing, setPlaying] = useState(false);
+
     // const [video, setVideo] = useState();
     const [genres, setGenres] = useState();
+
     useEffect(() => {
         fetch('/movies/GetMovies').then(res => {
             if (res.ok) {
@@ -26,7 +27,7 @@ const Movies = () => {
 
     return (
         (genres ?
-            <videoData.Provider value={ { setPlaying: setPlaying } }><CarouselContainer genres={ genres } ></CarouselContainer> </videoData.Provider>
+            <videoData.Provider value={ { openModal: null, setData: null } }> <CarouselContainer genres={ genres } ></CarouselContainer></videoData.Provider>
             : null)
     );
 };

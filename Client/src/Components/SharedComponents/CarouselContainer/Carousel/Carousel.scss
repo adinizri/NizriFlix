@@ -17,6 +17,7 @@
     background-color: rgb(202, 0, 0) !important;
     z-index: 1000;
 }
+
 .swiper-pagination-bullet{
     background-color: rgb(209, 209, 209) !important;
     z-index: 1000;
@@ -29,3 +30,8 @@
 }
 
 .swiper-button-prev:after, .swiper-button-next:after {   z-index: 1000;}
+
+.swiper-wrapper{
+    max-height: 30vh !important;
+    position: relative;
+}
