@@ -1,0 +1,27 @@
+.textColorAndSize{
+    color: white;
+    font-size:2em;
+}
+
+.containerDiv{
+    width: 50vw;
+    display: inline-flex;
+    margin: auto;
+    border-top: 1px #c7c7c7 solid;
+    border-radius: 3px;
+    padding: 2vh;
+    align-items: center;
+}
+
+
+.playIcon{
+    border: none;
+    width: 4vw;
+    background: transparent;
+    margin: 0 1vw 0 1vw;
+    cursor: pointer;
+    fill: rgb(207, 207, 207);
+    &:hover{
+        fill: rgb(114, 114, 114);
+    }
+}

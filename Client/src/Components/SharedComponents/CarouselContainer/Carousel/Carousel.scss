@@ -29,9 +29,54 @@
     font-weight: 600;
 }
 
-.swiper-button-prev:after, .swiper-button-next:after {   z-index: 1000;}
-
+.swiper-button-next {  
+    position: relative;
+    top: 0vh !important;
+    left: 92.1vw !important;
+    background-color: rgba(0, 0, 0, 0.322) !important;
+    height: 79% !important;
+    width: 3vw !important;
+    border-radius: 0px 7px 7px 0px;
+    color: white !important ;
+    // visibility: hidden;
+    // &:hover.swiper-button-next {
+    //     visibility: visible !important;
+    // }
+    // display: none !important ;
+  
+    }
+    .swiper-button-prev {  
+        position: relative;
+        top: 0vh !important;
+        left: 1vw !important;
+        background-color: rgba(0, 0, 0, 0.322) !important;
+        height: 79% !important;
+        width: 3vw !important;
+        border-radius: 7px 0px 0px 7px;
+        color: white !important;
+        // visibility: hidden;
+        // &:hover.swiper-button-next {
+        //     visibility: visible !important;
+        // }
+        // display: none !important ;
+      
+        }
+  
+    // .swiper-wrapper:hover + .swiper-button-next{
+    //     // display:flex !important;
+    //     display: none !important ;
+       
+    // }
+    // .swiper-button-prev:hover + .swiper-button-next{
+    //     display: flex !important;
+    // }
 .swiper-wrapper{
     max-height: 30vh !important;
     position: relative;
 }
+
+// .swiper-button-prev{
+
+//     position: relative;
+//     top: 12vh !important;
+// }

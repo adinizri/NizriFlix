@@ -28,7 +28,9 @@ for dirpath, dirnames, filenames in os.walk(dirlocation):
                     if '720p' in newName:
                         newName = newName.replace(
                             (newName[newName.index('720p'):len(newName)-1]), "")
-
+                    if '2160p' in newName:
+                        newName = newName.replace(
+                            (newName[newName.index('2160p'):len(newName)-1]), "")
                     newName += ".mp4"
                     newName = newName.replace(" .mp4", ".mp4")
 
@@ -36,9 +38,14 @@ for dirpath, dirnames, filenames in os.walk(dirlocation):
                     newName = newName.replace(".srt", "")
                     if 'mp4' in newName:  # fixing initial problems
                         newName = newName.replace(".mp4", "")
+                    if 'mkv' in newName:  # fixing initial problems
+                        newName = newName.replace(".mkv", "")
                     if '1080p' in newName:
                         newName = newName.replace(
                             (newName[newName.index('1080p'):len(newName)-1]), "")
+                    if '2160p' in newName:
+                        newName = newName.replace(
+                            (newName[newName.index('2160p'):len(newName)-1]), "")
 
                     elif '720p' in newName:
                         newName = newName.replace(

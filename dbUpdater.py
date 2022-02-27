@@ -63,7 +63,7 @@ def GetGenres(name, isMovie, dbData, getEpisodes):
                         videoId = video.movieID
                         break
                 else:
-                    if video.data['kind'] == 'tv series':
+                    if video.data['kind'] == 'tv series' or video.data['kind'] == 'movie':
                         videoId = video.movieID
                         break
 
@@ -85,27 +85,27 @@ def GetGenres(name, isMovie, dbData, getEpisodes):
 
 
 # Movies Part
-# for dirpath, dirnames, filenames in os.walk(moviesLocation):
+for dirpath, dirnames, filenames in os.walk(moviesLocation):
 
-#     for name in filenames:
-#         image = "Empty_Img.png"
-#         dirpath = dirpath.replace("\\", "/")
+    for name in filenames:
+        image = "Empty_Img.png"
+        dirpath = dirpath.replace("\\", "/")
 
-#         if '.mp4' in name:
+        if '.mp4' in name:
 
-#             found = False
-#             newName = name.replace('.mp4', "")
-#             dbData = (moviesDb.find_one({"name": newName}))
-#             # check if img exist with the same name
-#             image = ExistImage(newName, dirpath)
-#             genre = GetGenres(newName, True, dbData, False)
-#             obj = {"name": newName, "location": dirpath,
-#                    "image": image, "genre": genre}
-#             if image != "":
-#                 movieList.append(obj)
-#                 print("Added "+newName)
-#             else:
-#                 print("fail "+newName)
+            found = False
+            newName = name.replace('.mp4', "")
+            dbData = (moviesDb.find_one({"name": newName}))
+            # check if img exist with the same name
+            image = ExistImage(newName, dirpath)
+            genre = GetGenres(newName, True, dbData, False)
+            obj = {"name": newName, "location": dirpath,
+                   "image": image, "genre": genre}
+            if image != "":
+                movieList.append(obj)
+                print("Added "+newName)
+            else:
+                print("fail "+newName)
 
 
 # Series Part
@@ -162,9 +162,15 @@ for seriesName in seriesNamesList:
                             print("Added "+seriesName +
                                   " " + season + " "+episode)
 
+                        else:
+                            epiobj = {"seriesName": seriesName, "location": newDirpath, "episodeName": newName, "episodeTitle": "", "seriesLocation": seriesPath,
+                                      "episode": episode, "season": season}
+                            episodesList.append(epiobj)
+                            print("Added "+seriesName +
+                                  " " + season + " "+episode)
 # moviesDb.delete_many({})  # clear movie collection
 # moviesDb.insert_many(movieList)  # add to movie collection
-# seriesDb.delete_many({})  # clear series collection
-# seriesDb.insert_many(seriesList)
+seriesDb.delete_many({})  # clear series collection
+seriesDb.insert_many(seriesList)
 episodesDb.delete_many({})
 episodesDb.insert_many(episodesList)  # add to episodes collection

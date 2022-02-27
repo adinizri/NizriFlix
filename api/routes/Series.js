@@ -20,13 +20,13 @@ router.get("/GetSeries", async (req, res) => {
     let genres = await seriesModel.distinct('genre', {}); //gets the genres from the db
     let SeriesDbData = await seriesModel.find({}); //gets the data from db
     episodesDbData = await episodeModel.find();
-    genres.map((genre) => {
+    genres.map((genre) => { // create genres array
 
         seriesDataByGenre.push(new SeriesGenre(genre));
     });
-    SeriesDbData.map((s) => {
+    SeriesDbData.map((s) => {// addidng the episode to a seassons array
         series = new Series(s.name, s.genre);
-        for (let i = 1; i < s.seasons; i++) {
+        for (let i = 1; i <= s.seasons; i++) {
 
             season = new Season(s.name, i);
             seasonEpisodes = episodesDbData.filter(epi => epi.seriesName == s.name && epi.season == i);
@@ -46,26 +46,14 @@ router.get("/GetSeries", async (req, res) => {
 
         let bitImg = fs.readFileSync(location + '/' + s.image);//gets the image data in binery
         sImg = new Buffer.from(bitImg).toString("base64");//convert tthe image from base 2 to base 64
-
-        // dataJson = {
-        //     location: s.location, //the video location 
-        //     image: sImg,//img in base 64
-        //     name: s.name, //movie name
-        //     genre: s.genre,
-        //     seasons: JSON.stringify(series.GetSeasons)
-        // };
         series.SetImage(sImg);
-        seriesDataByGenre.forEach((seriesGenre) => {
+        seriesDataByGenre.forEach((seriesGenre) => { // insert series by their genre
 
             if (s.genre.includes(seriesGenre.genre)) {
                 seriesGenre.ListUpdater(series);
             }
         });
     });
-
-
-
-    //res.json(seriesDataByGenre);//sending response
 
     res.json(seriesDataByGenre);
 
@@ -74,6 +62,7 @@ router.get("/GetSeries", async (req, res) => {
 module.exports = router;
 
 
+// retrive the wanted episode from the server 
 router.get("/episodes/:location", async (req, res) => {
 
     let path = req.params.location; // video location from parameter

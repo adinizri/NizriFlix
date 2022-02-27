@@ -53,8 +53,9 @@ const Content = (props) => {
         else {
 
             openModal();
-            let data = props.data;
+            let data = Object.create(props.data, props.data.getPrototypeOf);
             data.image = "data:image/jfif;base64," + props.data.image;
+
             setData(data);
 
         }
